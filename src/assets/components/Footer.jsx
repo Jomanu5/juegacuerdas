@@ -16,7 +16,11 @@ import { FaInstagram, FaWhatsapp, FaYoutube, FaMapMarkerAlt, FaEnvelope } from "
 
 const Footer = () => {
   return (
-    <Box bg="gray.950" color="gray.400" mt={20}>
+    <Box 
+      bg="gray.950" 
+      color="gray.400" 
+      mt={20}
+      ml={{ base: 0, md: "280px" }}>
       <Container maxW="container.xl" py={12}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap={12}>
           

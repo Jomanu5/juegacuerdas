@@ -118,7 +118,7 @@ const SidebarTienda = () => {
       <Spacer />
 
       {/* --- SECCIÓN 5: USUARIO / FOOTER --- */}
-      <VStack w="full" gap={4}>
+      {/* <VStack w="full" gap={4}>
         <Separator borderColor="gray.100" />
         {token ? (
           <HStack w="full" justify="space-between">
@@ -149,7 +149,7 @@ const SidebarTienda = () => {
             Iniciar Sesión
           </Button>
         )}
-      </VStack>
+      </VStack> */}
     </Box>
   );
 };
