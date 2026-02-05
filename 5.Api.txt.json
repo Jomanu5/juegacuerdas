@@ -1,0 +1,229 @@
+// POST/ userstienda/register
+request: 
+    payload:{
+        name: string,
+        email: string,
+        password: string
+        rol: string 
+    }
+
+// POST/ userstienda/login
+request: 
+    payload:{
+        email: string,
+        password: string
+    }
+Response:
+    payload:{
+        token: string
+        usersTienda: {
+            id: number,
+            name: string,
+            email: string,
+            rol: string 
+        }
+    }
+// POST/ productos/create
+headers:
+    Authorization: Bearer <token>
+    content-type: application/json
+request:
+    payload:{
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+        esArrendable: boolean
+    }
+
+Response:
+    mensaje: string,
+    producto:{
+        id: number,
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+    }
+
+// GET /Productos/filtros
+request:
+    
+    payload: 
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+        esArrendable: boolean
+    
+Response:
+    productos: 
+       id: number,
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+ 
+
+
+GET /Productos/:id
+Request:
+    params:
+        id: number
+
+Response:
+    producto:
+       id: number,
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+
+    
+
+// PUT /Productos/update/:id
+headers:
+    Authorization: Bearer <token>   
+request:
+    params:
+        id: number
+    payload:
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+        esArrendable: boolean
+Response:
+    mensaje: string,
+    producto:
+       id: number,  
+        name: string,
+        description: string,
+        price: number,
+        stock: number,
+        imagenUrl: string,
+        categoria: string,
+// DELETE /Productos/delete/:id
+headers:
+    Authorization: Bearer <token
+    request:
+        params:
+            id: number
+    Response:
+        mensaje: string
+// GET /Categorias
+Request: 
+
+Response:
+    
+categorias:
+        id: number,
+        name: string
+        description: string
+// POST /Categorias/create
+headers:
+    Authorization: Bearer <token>
+request:
+    payload:
+        name: string
+        description: string
+Response:
+    mensaje: string,
+    categoria:
+        id: number,
+        name: string
+        description: string
+
+-----
+
+//POST/ userescuela/login
+request: 
+header: 
+    Authorization: Bearer <token>
+    payload:{
+        email: string,
+        password: string
+        rol: string
+    }
+Response:
+    payload:{
+        token: string
+        loginescuela: {
+            id: number,
+            email: string,
+            rol: string 
+        }
+    }
+//POST/ userescuela/register
+request: 
+
+    payload:{
+        email: string,
+        password: string   
+        rol: string
+    }
+
+Response:
+    mensaje: string,
+    loginescuela: { 
+        id: number,
+        email: string,
+        rol: string 
+    }
+
+// GET /userescuela/:id
+Request:
+header: 
+    Authorization: Bearer <token>
+    params:
+        id: number 
+Response:
+    escuela:
+        id: number,
+        name: string,
+        address: string,
+        phone: string,
+        email: string
+// PUT /userescuela/update/:id
+request
+header: 
+    Authorization: Bearer <token>
+    params:
+    id: number
+    payload:
+    id: number,
+        name: string,
+        address: string,
+        phone: string,
+        email: string
+Response
+    escuela:
+        id: number,
+        name: string,
+        address: string,
+        phone: string,
+        email: string
+
+//DELETE/ userescuela/delete/:id
+request:
+header: 
+    Authorization: Bearer <token>
+    params:
+        id: number
+Response:
+    mensaje: string
+
+
+// 

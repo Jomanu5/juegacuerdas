@@ -1,0 +1,55 @@
+import { useContext } from "react";
+import { ProductContext } from "../context/ProductContext";
+import { 
+  SimpleGrid, 
+  Container, 
+  Heading, 
+  Text, 
+  VStack, 
+  Button, 
+  Center,
+  Icon
+} from "@chakra-ui/react";
+import { LuPackageSearch } from "react-icons/lu"; // Un icono de búsqueda vacía
+import ProductCard from "../components/ProductCard";
+
+const MainTienda = () => {
+  const { products, isLoading } = useContext(ProductContext);
+
+  // 1. Mientras carga, mostramos el spinner
+  if (isLoading) return <Center h="50vh">Cargando violines...</Center>;
+
+  // 2. Si terminó de cargar pero el array está vacío
+  if (products.length === 0) {
+    return (
+      <Center py={20}>
+        <VStack gap={6}>
+          <Icon as={LuPackageSearch} boxSize="80px" color="gray.300" />
+          <VStack gap={2}>
+            <Heading size="xl">¡Oh, no! El taller está vacío</Heading>
+            <Text color="gray.600" textAlign="center">
+              Actualmente no tenemos productos disponibles en la tienda. <br />
+              Vuelve pronto para ver los nuevos violines y accesorios.
+            </Text>
+          </VStack>
+          <Button colorPalette="orange" variant="outline" onClick={() => window.location.reload()}>
+            Actualizar página
+          </Button>
+        </VStack>
+      </Center>
+    );
+  }
+
+  // 3. Si hay productos, mostramos la grilla normal
+  return (
+    <Container maxW="container.xl" py={10}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} gap={8}>
+        {products.map((prod) => (
+          <ProductCard key={prod.id} producto={prod} />
+        ))}
+      </SimpleGrid>
+    </Container>
+  );
+};
+
+export default MainTienda;
