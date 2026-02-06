@@ -25,34 +25,52 @@ const SidebarTienda = () => {
   }
 
   // Componente interno para los botones de navegación
-  const NavItem = ({ icon, label, to, colorActive = "orange.600", bgActive = "orange.50" }) => {
-    const isActive = location.pathname === to;
-    
-    return (
-      <HStack
-        as={RouterLink}
-        to={to}
-        w="full"
-        px={4}
-        py={3}
-        borderRadius="xl"
-        cursor="pointer"
-        transition="all 0.3s ease"
-        bg={isActive ? bgActive : "transparent"}
-        color={isActive ? colorActive : "gray.500"}
-        _hover={{ 
-          bg: bgActive, 
-          color: colorActive, 
-          transform: "translateX(8px)" 
-        }}
-      >
-        <Icon as={icon} fontSize="lg" />
-        <Text fontWeight={isActive ? "bold" : "medium"} fontSize="sm">
-          {label}
+const NavItem = ({ icon, label, to, isDisabled = false, colorActive = "orange.600", bgActive = "orange.50" }) => {
+  const location = useLocation();
+  const isActive = to === "/"
+    ? location.pathname === "/"
+    : location.pathname.startsWith(to);
+  
+  return (
+    <HStack
+      // Si está deshabilitado, lo renderizamos como un 'div' para que no navegue
+      as={isDisabled ? "div" : RouterLink}
+      to={isDisabled ? undefined : to}
+      w="full"
+      px={4}
+      py={3}
+      borderRadius="xl"
+      transition="all 0.3s ease"
+      
+      // --- LÓGICA DE ESTILOS DESHABILITADOS ---
+      cursor={isDisabled ? "not-allowed" : "pointer"}
+      opacity={isDisabled ? 0.4 : 1}
+      filter={isDisabled ? "grayscale(1)" : "none"}
+      pointerEvents={isDisabled ? "none" : "auto"} // Evita clics físicos
+      
+      // Estilos normales
+      bg={isActive ? bgActive : "transparent"}
+      color={isActive ? colorActive : "gray.500"}
+      _hover={!isDisabled ? { 
+        bg: bgActive, 
+        color: colorActive, 
+        transform: "translateX(8px)" 
+      } : {}}
+    >
+      <Icon as={icon} fontSize="lg" />
+      <Text fontWeight={isActive ? "bold" : "medium"} fontSize="sm">
+        {label}
+      </Text>
+      
+      {/* Opcional: Un pequeño aviso de "Pronto" */}
+      {isDisabled && (
+        <Text fontSize="9px" fontWeight="black" ml="auto" color="gray.400">
+          PRONTO
         </Text>
-      </HStack>
-    );
-  };
+      )}
+    </HStack>
+  );
+};
 
   return (
     <Box
@@ -87,12 +105,13 @@ const SidebarTienda = () => {
           Menú Principal
         </Text>
         <NavItem icon={FaStore} label="Inicio Tienda" to="/tienda" />
-        <NavItem 
+        <NavItem  
           icon={FaGraduationCap} 
           label="Ir a la Escuela" 
           to="/escuela" 
           colorActive="blue.600" 
           bgActive="blue.50" 
+          isDisabled={true}
         />
       </VStack>
 
@@ -117,39 +136,7 @@ const SidebarTienda = () => {
 
       <Spacer />
 
-      {/* --- SECCIÓN 5: USUARIO / FOOTER --- */}
-      {/* <VStack w="full" gap={4}>
-        <Separator borderColor="gray.100" />
-        {token ? (
-          <HStack w="full" justify="space-between">
-             <HStack gap={3}>
-                <Icon as={FaUserCircle} fontSize="2xl" color="gray.400" />
-                <Text fontSize="xs" fontWeight="bold" color="gray.600">Mi Perfil</Text>
-             </HStack>
-             <IconButton 
-               aria-label="Cerrar Sesión" 
-               variant="ghost" 
-               size="xs" 
-               color="red.400"
-               onClick={logout}
-             >
-                <FaSignOutAlt />
-             </IconButton>
-          </HStack>
-        ) : (
-          <Button 
-            as={RouterLink} 
-            to="/tienda/login" 
-            colorPalette="orange" 
-            variant="solid" 
-            w="full" 
-            size="sm"
-            borderRadius="lg"
-          >
-            Iniciar Sesión
-          </Button>
-        )}
-      </VStack> */}
+      
     </Box>
   );
 };
