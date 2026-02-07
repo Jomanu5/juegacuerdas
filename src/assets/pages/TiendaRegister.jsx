@@ -7,6 +7,8 @@ import {
   PasswordStrengthMeter,
 } from "@/components/ui/password-input"
 import { Link as ChakraLink } from "@chakra-ui/react"
+import { Toaster, toaster } from "@/components/ui/toaster"
+
 
 import { API_TIENDA } from '../../apiConfig';
 

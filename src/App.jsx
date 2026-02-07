@@ -20,6 +20,8 @@ function App() {
 
   return (
     <>
+    <Toaster />
+
       <ProductPorvider>
         <TokenProvider>
 

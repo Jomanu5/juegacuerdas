@@ -146,7 +146,7 @@ const Navbar = () => {
           
           {/* Logo a la izquierda */}
           <HStack as={RouterLink} to="/tienda" gap={2}>
-            <Image src="./src/assets/img/Logo_Color.png" boxSize="50px" fit="contain" />
+            <Image src="/Logo_Color.png" boxSize="50px" fit="contain" />
             <Heading size="s" fontWeight="black" color="orange.600">JuegaCuerdas</Heading>
           </HStack>
 

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { API_TIENDA } from "../../apiConfig";
 
 
 export const ProductContext = createContext()
 
-const API_URL = import.meta.env.VITE_API_URL_TIENDA;
 
 export const ProductPorvider = ({children}) => {
     const [products, setProducts] = useState([])
@@ -14,7 +14,7 @@ export const ProductPorvider = ({children}) => {
         try{
             setIsLoading(true)
             const { data } =
- await axios.get(`${API_URL}/productos` || 'http://localhost:3000')
+ await axios.get(`${API_TIENDA}/productos` || 'http://localhost:3000')
             setProducts (data);
         } catch (error) {
             console.error("Error al obtener productos:", error); 
