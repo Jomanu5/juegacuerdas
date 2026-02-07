@@ -14,6 +14,7 @@ import TiendaRegister from './assets/pages/TiendaRegister.jsx'
 import { ProductPorvider } from './assets/context/ProductContext.jsx'
 import UploadProductPage from './assets/pages/UploadProductPage.jsx'
 import AdminRoute from './assets/components/AdminRoute.jsx'
+import { Toaster, toaster } from "@/components/ui/toaster"
 
 function App() {
   const [count, setCount] = useState(0)
