@@ -97,10 +97,6 @@ const Footer = () => {
 
         <Stack direction={{ base: "column", md: "row" }} justify="space-between" align="center" fontSize="xs">
           <Text>© 2026 JuegaCuerdas. Desarrollado para músicos.</Text>
-          <HStack gap={6}>
-            <Image src="/webpay-logo.png" h="20px" opacity={0.5} filter="grayscale(1)" />
-            <Text>Pagos protegidos</Text>
-          </HStack>
         </Stack>
       </Container>
     </Box>
