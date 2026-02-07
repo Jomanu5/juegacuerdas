@@ -23,9 +23,9 @@ import {
   PasswordInput,
   PasswordStrengthMeter,
 } from "@/components/ui/password-input"
+import { API_TIENDA } from "../../apiConfig";
 
 
-const API_URL = import.meta.env.VITE_API_URL_TIENDA;
 
 
 const TiendaLogin = () => {
@@ -43,7 +43,7 @@ const handleSubmit = async (e) =>{
   e.preventDefault();
 
   try {
-    const { data } = await axios.post (`${API_URL}/auth/login` , {
+    const { data } = await axios.post (`${API_TIENDA}/auth/login` , {
       email,
       password
     })

@@ -171,7 +171,7 @@ const Navbar = () => {
                     <Drawer.Header borderBottomWidth="1px" py={6}>
                       <Drawer.Title>
                         <VStack align="center" gap={2}>
-                          <Image src="./src/assets/img/Logo_Color.png" boxSize="60px" />
+                          <Image src="./Logo_Color.png" boxSize="60px" />
                           <Text fontWeight="black" fontSize="xl">Menú Principal</Text>
                         </VStack>
                       </Drawer.Title>
@@ -222,7 +222,7 @@ const Navbar = () => {
           <HStack spacing={4} justify="space-between" p={4}>
             <Button bg="transparent" as={RouterLink} to="/tienda" _hover={{ bg: 'transparent' }}>
               <HStack>
-                <Image src="./src/assets/img/Logo_Color.png" boxSize="50px" fit="cover" />
+                <Image src="./Logo_Color.png" boxSize="50px" fit="cover" />
                 <Heading size="md" color={'black'}>JuegaCuerdas</Heading>
               </HStack>
             </Button>
