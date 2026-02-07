@@ -1,4 +1,4 @@
-import { Box, Button, Card, Container, Field, Heading, Input, Separator, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Card, Container, Field, Heading, Input, Separator, Stack, Text, Toaster } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/password-input"
 import { Link as ChakraLink } from "@chakra-ui/react"
 
+import { API_TIENDA } from '../../apiConfig';
 
-const API_URL = import.meta.env.VITE_API_URL_TIENDA;
+
 
 
 const TiendaRegister = () => {
@@ -25,7 +26,7 @@ const TiendaRegister = () => {
         e.preventDefault();
         
         if (password !== confirmPassword) {
-            toaster.create({
+            Toaster.create({
                 title: "Error",
                 description: "Las contraseñas no coinciden",
                 type: "error"
@@ -43,7 +44,7 @@ const TiendaRegister = () => {
         setIsLoading(true);
         
         try {
-            await axios.post (`${API_URL}/auth/register` || 'http://localhost:3000', {
+            await axios.post (`${API_TIENDA}/auth/register`, {
                 nombre: nombre.trim(),
                 email: email.trim(),
                 password: password.trim()

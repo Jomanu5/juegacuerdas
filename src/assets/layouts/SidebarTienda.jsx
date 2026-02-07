@@ -90,7 +90,7 @@ const NavItem = ({ icon, label, to, isDisabled = false, colorActive = "orange.60
     >
       {/* --- SECCIÓN 1: BRANDING --- */}
       <HStack mb={10} gap={3} as={RouterLink} to="/tienda">
-        <Image src="/src/assets/img/Logo_Color.png" boxSize="45px" />
+        <Image src="/Logo_Color.png"  boxSize="45px" />
         <VStack align="flex-start" gap={0}>
           <Heading size="md" fontWeight="black" color="gray.800" letterSpacing="tight">
             JuegaCuerdas

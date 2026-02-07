@@ -30,7 +30,7 @@ const Home = () => {
           <Stack gap={6} align="center">
             {/* Imagen responsiva: más pequeña en móvil para no tapar todo */}
             <Image 
-              src="src/assets/img/Logo_Color.png" 
+              src="/Logo_Color.png" 
               alt="JuegaCuerdas Logo" 
               maxW={{ base: "280px", md: "500px" }} 
               mb={2} 
