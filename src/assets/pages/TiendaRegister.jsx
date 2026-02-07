@@ -43,7 +43,7 @@ const TiendaRegister = () => {
         setIsLoading(true);
         
         try {
-            await axios.post (`${API_URL}/auth/register`, {
+            await axios.post (`${API_URL}/auth/register` || 'http://localhost:3000', {
                 nombre: nombre.trim(),
                 email: email.trim(),
                 password: password.trim()

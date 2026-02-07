@@ -14,7 +14,7 @@ export const ProductPorvider = ({children}) => {
         try{
             setIsLoading(true)
             const { data } =
- await axios.get(`${API_URL}/productos`)
+ await axios.get(`${API_URL}/productos` || 'http://localhost:3000')
             setProducts (data);
         } catch (error) {
             console.error("Error al obtener productos:", error); 

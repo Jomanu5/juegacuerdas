@@ -33,7 +33,7 @@ const UploadProductPage = () => {
       // Obtenemos el token del localStorage (o de tu contexto)
       const token = localStorage.getItem("token"); 
 
-      await axios.post(`${API_URL}/productos`, product, {
+      await axios.post(`${API_URL}/productos` || 'http://localhost:3000', product, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
