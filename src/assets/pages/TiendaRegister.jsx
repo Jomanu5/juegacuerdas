@@ -24,35 +24,35 @@ const TiendaRegister = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (password !== confirmPassword) {
+        return toaster.create({ 
+            title: "Error",
+            description: "Las contraseñas no coinciden",
+            type: "error"
+          });
+    }
+    
+    setIsLoading(true);
+    
+    try {
+        await axios.post(`${API_TIENDA}/auth/register`, {
+            nombre: nombre.trim(),
+            email: email.trim(),
+            password: password.trim()
+        });
+
+        toaster.create({
+            title: "¡Cuenta creada!",
+            description: "Ya puedes iniciar sesión con tus credenciales.",
+            type: "success"
+        });
+
+        navigate("/tienda/login"); 
         
-        if (password !== confirmPassword) {
-            Toaster.create({
-                title: "Error",
-                description: "Las contraseñas no coinciden",
-                type: "error"
-              });
-        }
-        
-        if (password.length < 6) {
-            return toaster.create({
-                title: "Error",
-                description: "La contraseña debe tener al menos 6 caracteres",
-                type: "error"
-            });
-        }
-        
-        setIsLoading(true);
-        
-        try {
-            await axios.post (`${API_TIENDA}/auth/register`, {
-                nombre: nombre.trim(),
-                email: email.trim(),
-                password: password.trim()
-            });
-            
-        } catch (error) {
+    } catch (error) {
             console.error("Error al registrar tienda:", error);
             toaster.create({
                 title: "Error al registrar tienda",

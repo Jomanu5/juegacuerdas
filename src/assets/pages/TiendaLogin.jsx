@@ -15,7 +15,7 @@ import {
   Toast
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 import axios from "axios";
 import { Toaster, toaster } from "@/components/ui/toaster"
@@ -28,12 +28,14 @@ import { API_TIENDA } from "../../apiConfig";
 
 
 
-const TiendaLogin = () => {
 
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
-const [isLoading, setIsLoading] = useState(false)
-const {login } = useContext(TokenContext);
+const TiendaLogin = () => {
+  
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const {login } = useContext(TokenContext);
+  const navigate = useNavigate()
 
 
 
