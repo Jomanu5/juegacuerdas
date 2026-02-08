@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Spinner } from "@chakra-ui/react"; // Agregamos Spinner
+import { Button, HStack, Spinner } from "@chakra-ui/react"; // Agregamos Spinner
 import { TokenContext } from "../context/TokenContext";
 import { FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -30,15 +30,26 @@ const LogButton = () => {
           Cerrar Sesión
         </Button>
       ) : (
+        <HStack>
         <Button
           colorPalette="green" 
           variant="solid" // Solid resalta más para nuevos alumnos
           size="sm"
           onClick={() => navigate("/tienda/login")}
-        >
+          >
           <FaSignInAlt style={{ marginRight: '8px' }} />
           Iniciar Sesión
         </Button>
+        <Button
+          colorPalette="blue" 
+          variant="solid" // Solid resalta más para nuevos alumnos
+          size="sm"
+          onClick={() => navigate("/tienda/register")}
+          >
+          <FaSignInAlt style={{ marginRight: '8px' }} />
+          Regístrate
+        </Button>
+      </HStack>
       )}
     </>
   );

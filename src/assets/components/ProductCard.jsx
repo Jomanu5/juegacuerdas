@@ -6,12 +6,22 @@ import {
   Stack, 
   Badge, 
   Group,
-  IconButton
+  IconButton,
+  Box
 } from "@chakra-ui/react";
-import { LuShoppingCart, LuEye } from "react-icons/lu"; // Iconos modernos
+import { LuShoppingCart, LuEye } from "react-icons/lu"; 
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+
+
 
 const ProductCard = ({ producto }) => {
-  // Supongamos que 'producto' tiene: id, name, price, img, category
+  const navigate = useNavigate()
+  const handleVerDetalles = () => {
+    navigate(`/tienda/producto/${producto.id}`);
+  };
+
+  const {agregarCarrito} = useCart();
   
   return (
     <Card.Root 
@@ -24,8 +34,8 @@ const ProductCard = ({ producto }) => {
       {/* IMAGEN DEL PRODUCTO */}
       <Box position="relative">
         <Image
-          src={producto.img}
-          alt={producto.name}
+          src={producto.imagenUrl}
+          alt={producto.nombre}
           height="240px"
           width="full"
           objectFit="cover"
@@ -38,18 +48,18 @@ const ProductCard = ({ producto }) => {
           colorPalette="orange" 
           variant="solid"
         >
-          {producto.category}
+          {producto.categoria}
         </Badge>
       </Box>
 
       <Card.Body gap="2">
         <Card.Title mb="1" fontWeight="bold" fontSize="lg">
-          {producto.name}
+          {producto.nombre}
         </Card.Title>
         
         <Card.Description>
           <Text textStyle="2xl" fontWeight="black" color="orange.600">
-            ${producto.price.toLocaleString('es-CL')}
+            ${producto.precio.toLocaleString('es-CL')}
           </Text>
         </Card.Description>
       </Card.Body>
@@ -60,11 +70,14 @@ const ProductCard = ({ producto }) => {
             flex="1" 
             colorPalette="orange" 
             variant="solid"
-            onClick={() => handleAddToCart(producto)}
+            onClick={() => agregarCarrito(producto)}
           >
-            <LuShoppingCart /> Agregar
+            <LuShoppingCart /> Agregar al carrito
           </Button>
-          <IconButton variant="outline" aria-label="Ver detalles">
+          <IconButton 
+            variant="outline" 
+            aria-label="Ver detalles"
+            onClick={ handleVerDetalles }>
             <LuEye />
           </IconButton>
         </Group>

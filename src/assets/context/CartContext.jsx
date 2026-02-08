@@ -1,9 +1,10 @@
+import { Toaster, toaster } from "@/components/ui/toaster"
 import { createContext, useState, useEffect, useContext } from 'react';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // Inicializar el carrito desde LocalStorage (o vacío si no hay nada)
+
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('juegacuerdas_cart');
     return savedCart ? JSON.parse(savedCart) : [];
@@ -24,7 +25,14 @@ export const CartProvider = ({ children }) => {
       }
       return [...prev, { ...product, count: 1 }];
     });
+    toaster.create({
+      title: "Producto agregado",
+      description: `${product.nombre} ya está en tu carrito.`,
+      type: "success", // Color verde para éxito
+      duration: 3000,   // 3 segundos
+    });
   };
+
 
   const incrementQuantity = (id) => {
     setCart((prev) =>

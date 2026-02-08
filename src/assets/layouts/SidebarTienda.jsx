@@ -4,12 +4,15 @@ import {
 } from "@chakra-ui/react";
 import { 
   FaStore, FaGraduationCap, FaMusic, FaTools, 
-  FaPlusSquare, FaSignOutAlt, FaUserCircle 
+  FaPlusSquare, FaSignOutAlt, FaUserCircle, 
+  FaMinusSquare
 } from "react-icons/fa";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { TokenContext } from "../context/TokenContext";
 import { jwtDecode } from "jwt-decode";
+import { GrConfigure } from "react-icons/gr";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 const SidebarTienda = () => {
   const location = useLocation();
@@ -120,17 +123,20 @@ const NavItem = ({ icon, label, to, isDisabled = false, colorActive = "orange.60
         <Text fontSize="10px" fontWeight="black" color="gray.400" mb={2} letterSpacing="widest" textTransform="uppercase">
           Catálogo
         </Text>
-        <NavItem icon={FaMusic} label="Violines y Cellos" to="/tienda/violines" />
-        <NavItem icon={FaTools} label="Accesorios" to="/tienda/accesorios" />
+        <NavItem icon={FaMusic} label="Violines y Cellos" to="/tienda/productos?categoria=violines" />
+        <NavItem icon={FaTools} label="Accesorios" to="/tienda/productos?categoria=accesorios" />
+
       </VStack>
 
       {/* --- SECCIÓN 4: ADMIN (SOLO VISIBLE SI ES ADMIN) --- */}
       {isAdmin && (
         <VStack align="flex-start" gap={1} w="full" mt={8}>
           <Text fontSize="10px" fontWeight="black" color="red.400" mb={2} letterSpacing="widest" textTransform="uppercase">
-            Administración
+            Panel de Administración
           </Text>
           <NavItem icon={FaPlusSquare} label="Subir Producto" to="/tienda/subir-producto" />
+          <NavItem icon={FaMinusSquare} label="Editar/Eliminar productos" to="/tienda/editar-producto" />
+          <NavItem icon={CiDeliveryTruck} label="Ver pedidos" to="/tienda/pedidos" />
         </VStack>
       )}
 

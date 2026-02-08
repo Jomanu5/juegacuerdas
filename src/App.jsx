@@ -11,10 +11,12 @@ import { CartProvider } from './assets/context/CartContext.jsx'
 import TokenProvider from './assets/context/TokenContext.jsx'
 import TiendaLogin from './assets/pages/TiendaLogin.jsx'
 import TiendaRegister from './assets/pages/TiendaRegister.jsx'
-import { ProductPorvider } from './assets/context/ProductContext.jsx'
+import {  ProductProvider } from './assets/context/ProductContext.jsx'
 import UploadProductPage from './assets/pages/UploadProductPage.jsx'
 import AdminRoute from './assets/components/AdminRoute.jsx'
 import { Toaster, toaster } from "@/components/ui/toaster"
+import ProductosTienda from './assets/pages/ProductosTienda.jsx'
+import ProductPage from './assets/pages/ProductPage.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,7 +25,7 @@ function App() {
     <>
     <Toaster />
 
-      <ProductPorvider>
+      <ProductProvider>
         <TokenProvider>
 
           <CartProvider>
@@ -38,6 +40,8 @@ function App() {
                     <Route path="/tienda/cart" element={<CartPage />} />
                     <Route path="/tienda/login" element={<TiendaLogin />} />
                     <Route path="/tienda/register" element={<TiendaRegister />} />
+                    <Route path = "/tienda/productos" element ={<ProductosTienda />} />
+                    <Route path="/tienda/producto/:id" element={<ProductPage />} />
                     
                     <Route element ={<AdminRoute />}>
                       <Route path="/tienda/subir-producto" element ={<UploadProductPage />} />
@@ -57,7 +61,7 @@ function App() {
             </BrowserRouter>
           </CartProvider>
         </TokenProvider>
-      </ProductPorvider> 
+      </ProductProvider> 
     </>
   )
 }

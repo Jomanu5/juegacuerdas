@@ -1,55 +1,82 @@
+import { 
+  Box, Heading, Text, SimpleGrid, Image, 
+  Stack, Card, Button, Container, Badge, 
+  Skeleton,
+  HStack
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
-import { 
-  SimpleGrid, 
-  Container, 
-  Heading, 
-  Text, 
-  VStack, 
-  Button, 
-  Center,
-  Icon
-} from "@chakra-ui/react";
-import { LuPackageSearch } from "react-icons/lu"; // Un icono de búsqueda vacía
-import ProductCard from "../components/ProductCard";
+import { Link } from "react-router-dom";
 
 const MainTienda = () => {
   const { products, isLoading } = useContext(ProductContext);
 
-  // 1. Mientras carga, mostramos el spinner
-  if (isLoading) return <Center h="50vh">Cargando violines...</Center>;
+  // 🎻 Tomamos solo los 3 primeros productos de la lista
+  const ultimosProductos = products?.slice(0, 3) || []
 
-  // 2. Si terminó de cargar pero el array está vacío
-  if (products.length === 0) {
-    return (
-      <Center py={20}>
-        <VStack gap={6}>
-          <Icon as={LuPackageSearch} boxSize="80px" color="gray.300" />
-          <VStack gap={2}>
-            <Heading size="xl">¡Oh, no! El taller está vacío</Heading>
-            <Text color="gray.600" textAlign="center">
-              Actualmente no tenemos productos disponibles en la tienda. <br />
-              Vuelve pronto para ver los nuevos violines y accesorios.
-            </Text>
-          </VStack>
-          <Button colorPalette="orange" variant="outline" onClick={() => window.location.reload()}>
-            Actualizar página
-          </Button>
-        </VStack>
-      </Center>
-    );
-  }
-
-  // 3. Si hay productos, mostramos la grilla normal
   return (
-    <Container maxW="container.xl" py={10}>
-      <SimpleGrid columns={{ base: 1, md: 3 }} gap={8}>
-        {products.map((prod) => (
-          <ProductCard key={prod.id} producto={prod} />
-        ))}
-      </SimpleGrid>
+    <Container maxW="container.xl" py={12}>
+      {/* --- SECCIÓN HERO: EL SALUDO --- */}
+      <Stack textAlign="center" gap={6} mb={20} py={10}>
+        <Badge variant="subtle" colorPalette="orange" alignSelf="center" px={4} py={1}>
+          Desde Santiago para todo Chile
+        </Badge>
+        <Heading size="4xl" fontWeight="black" letterSpacing="tight">
+          La tienda oficial de <br />
+          <Text as="span" color="orange.600">JuegaCuerdas</Text>
+        </Heading>
+        <Text fontSize="xl" color="gray.600" maxW="2xl" mx="auto">
+          Instrumentos, accesorios y materiales seleccionados por músicos profesionales 
+          para acompañar cada paso de tu formación artística.
+        </Text>
+        <HStack justify="center" gap={4}>
+          <Button as={Link} to="/tienda/productos" size="lg" colorPalette="orange" px={8}>
+              Ve todos nuestros productos
+          </Button>
+        </HStack>
+      </Stack>
+
+      {/* --- SECCIÓN: NOVEDADES --- */}
+      <Box>
+        <HStack justify="space-between" mb={8} pl={4}>
+          <Heading size="lg">Últimas Novedades</Heading>
+         
+        </HStack>
+
+        <SimpleGrid  columns={{ base: 1, md: 3 }} gap={8} >
+          {isLoading ? (
+            // Mostramos esqueletos de carga si aún no llegan los datos de Render
+            [1, 2, 3].map((i) => <Skeleton key={i} height="350px" borderRadius="lg" />)
+          ) : (
+            ultimosProductos.map((producto) => (
+              <Card.Root key={producto.id} variant="elevated" overflow="hidden" transition="transform 0.2s" _hover={{ transform: "translateY(-5px)" }}>
+                <Image
+                  src={producto.imagenUrl || "https://via.placeholder.com/300x200?text=Instrumento"}
+                  alt={producto.nombre}
+                  height="220px"
+                  objectFit="cover"
+                />
+                <Card.Body gap={2}>
+                  <Text fontSize="xs" fontWeight="bold" color="gray.500" textTransform="uppercase">
+                    {producto.categoria}
+                  </Text>
+                  <Card.Title fontSize="xl">{producto.nombre}</Card.Title>
+                  <Text textStyle="2xl" fontWeight="bold" color="orange.600">
+                    ${producto.precio?.toLocaleString('es-CL')}
+                  </Text>
+                </Card.Body>
+                <Card.Footer>
+                  <Button as={Link} to={`/tienda/producto/${producto.id}`} variant="outline" width="full">
+                    Ver Detalles
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            ))
+          )}
+        </SimpleGrid>
+      </Box>
     </Container>
   );
 };
 
-export default MainTienda;
+export default MainTienda ;

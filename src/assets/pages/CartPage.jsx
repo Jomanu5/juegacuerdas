@@ -7,11 +7,17 @@ import {
   Flex, 
   Button, 
   Image,
-  Separator
+  Separator,
+  useDisclosure,
+  Dialog,
+  Portal,
+  DialogCloseTrigger,
+  CloseButton
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaTrash, FaPlus, FaMinus, FaArrowLeft } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { useRef } from "react";
 
 const CartPage = () => {
   const { 
@@ -23,7 +29,8 @@ const CartPage = () => {
     clearCart 
   } = useCart();
 
-  // 1. Estado de Carrito Vacío
+
+       // 1. Estado de Carrito Vacío
   if (cart.length === 0) {
     return (
       <Container maxW="container.md" py={20} textAlign="center">
@@ -65,8 +72,8 @@ const CartPage = () => {
             >
               {/* Imagen del producto */}
               <Image 
-                src={item.img || "https://via.placeholder.com/150"} 
-                alt={item.name} 
+                src={item.imagenUrl || "https://via.placeholder.com/150"} 
+                alt={item.nombre} 
                 boxSize="110px" 
                 objectFit="contain" 
               />
@@ -74,10 +81,10 @@ const CartPage = () => {
               {/* Información básica */}
               <Box flex="1" textAlign={{ base: "center", sm: "left" }}>
                 <Text fontWeight="bold" fontSize="lg" color="gray.800">
-                  {item.name}
+                  {item.nombre}
                 </Text>
                 <Text color="gray.500" fontSize="sm">
-                  Precio unitario: ${item.price.toLocaleString()}
+                  Precio unitario: ${item.precio.toLocaleString()}
                 </Text>
               </Box>
 
@@ -114,7 +121,7 @@ const CartPage = () => {
               {/* Subtotal por producto */}
               <Box textAlign="right" minW="120px">
                 <Text fontWeight="extrabold" fontSize="lg">
-                  ${(item.price * item.count).toLocaleString()}
+                  ${(item.precio * item.count).toLocaleString()}
                 </Text>
               </Box>
 
@@ -130,16 +137,57 @@ const CartPage = () => {
             </Flex>
           ))}
 
-          <Button 
-            variant="plain" 
-            colorPalette="red" 
-            size="sm" 
-            onClick={clearCart} 
-            alignSelf="flex-end"
-            mt={2}
-          >
-            Vaciar todo el carrito
-          </Button>
+          
+          {/* MENSAJE DE ALERTA AL VACIAR CARRITO */}
+
+          <Dialog.Root placement="center" key="md">
+            <Dialog.Trigger asChild>
+              <Button
+                variant="outline"
+                colorPalette="red"
+                size="sm"
+                alignSelf="flex-end"
+                mt={2}
+              >
+                Vaciar todo el carrito
+              </Button>
+            </Dialog.Trigger>
+            <Portal>
+              <Dialog.Backdrop />
+              <Dialog.Positioner>
+                <Dialog.Content>
+
+
+                  <Dialog.Header>
+                    <Dialog.Title>
+                      ¿Estás seguro que deseas vaciar el carrito?
+
+                    </Dialog.Title>
+                  </Dialog.Header>
+                  <Dialog.Body>
+                    Esta acción no se puede deshacer
+                  </Dialog.Body>
+                  <Dialog.Footer>
+                    <Dialog.ActionTrigger>
+                      <Button variant="outline">
+                        Cancelar
+                      </Button>
+                    </Dialog.ActionTrigger>
+                    <Button
+                      onClick={clearCart}>
+                      Vaciar Carrito
+                    </Button>
+                  </Dialog.Footer>
+                  <DialogCloseTrigger>
+                    <CloseButton size="sm" />
+                  </DialogCloseTrigger>
+                </Dialog.Content>
+              </Dialog.Positioner>
+
+            </Portal>
+          </Dialog.Root>
+
+          
         </Stack>
 
         {/* SECCIÓN DERECHA: RESUMEN DE PAGO (STICKY) */}
