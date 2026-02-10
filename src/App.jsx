@@ -18,6 +18,7 @@ import { Toaster, toaster } from "@/components/ui/toaster"
 import ProductosTienda from './assets/pages/ProductosTienda.jsx'
 import ProductPage from './assets/pages/ProductPage.jsx'
 import EditProductPage from './assets/pages/EditProductPage.jsx'
+import NotFound from './assets/pages/NotFound.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,7 +44,7 @@ function App() {
                     <Route path="/tienda/register" element={<TiendaRegister />} />
                     <Route path = "/tienda/productos" element ={<ProductosTienda />} />
                     <Route path="/tienda/producto/:id" element={<ProductPage />} />
-                    
+                    <Route path="*" element={<NotFound />} />                     
                     <Route element ={<AdminRoute />}>
                       <Route path="/tienda/subir-producto" element ={<UploadProductPage />} />
                       <Route path="/tienda/editar-producto" element ={<EditProductPage />} />

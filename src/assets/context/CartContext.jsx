@@ -10,7 +10,6 @@ export const CartProvider = ({ children }) => {
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // Guardar en LocalStorage cada vez que el carrito cambie
   useEffect(() => {
     localStorage.setItem('juegacuerdas_cart', JSON.stringify(cart));
   }, [cart]);
@@ -58,17 +57,19 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
-  const total = cart.reduce((acc, item) => acc + item.price * item.count, 0);
+  const total = cart.reduce((acc, item) => {
+  return acc + (Number(item.precio) * item.count);
+}, 0);
 
   // Cantidad total de productos (útil para la burbuja roja en el icono del carrito)
-  const cartCount = cart.reduce((acc, item) => acc + item.count, 0);
+  // const cartCount = cart.reduce((acc, item) => acc + item.count, 0);
 
   return (
     <CartContext.Provider
       value={{
         cart,
         total,
-        cartCount,
+        // cartCount,
         agregarCarrito,
         incrementQuantity,
         decrementQuantity,

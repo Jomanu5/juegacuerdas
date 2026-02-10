@@ -123,8 +123,12 @@ const NavItem = ({ icon, label, to, isDisabled = false, colorActive = "orange.60
         <Text fontSize="10px" fontWeight="black" color="gray.400" mb={2} letterSpacing="widest" textTransform="uppercase">
           Catálogo
         </Text>
-        <NavItem icon={FaMusic} label="Violines y Cellos" to="/tienda/productos?categoria=violines" />
+        <NavItem icon={FaMusic} label="Violines" to="/tienda/productos?categoria=violines" />
         <NavItem icon={FaTools} label="Accesorios" to="/tienda/productos?categoria=accesorios" />
+        <NavItem icon={FaMusic} label="Pecastillas" to="/tienda/productos?categoria=pecastillas" />
+        <NavItem icon={FaMusic} label="Cuerdas" to="/tienda/productos?categoria=cuerdas" />
+
+
 
       </VStack>
 

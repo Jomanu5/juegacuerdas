@@ -46,6 +46,8 @@ const ProductPage = () => {
     </Center>
   );
 
+  
+
   return (
     <Container maxW="container.xl" py={10}>
       {/* Botón Volver */}

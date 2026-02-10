@@ -227,9 +227,9 @@ const Navbar = () => {
               </HStack>
             </Button>
 
-            <InputGroup flex="1" maxW="400px">
+            {/* <InputGroup flex="1" maxW="400px">
               <Input placeholder="¿Qué accesorio buscas hoy?" borderRadius="full" />
-            </InputGroup>
+            </InputGroup> */}
 
             <HStack spacing={6}>
               <Link as={RouterLink} to="/tienda/cart">
