@@ -17,6 +17,7 @@ import AdminRoute from './assets/components/AdminRoute.jsx'
 import { Toaster, toaster } from "@/components/ui/toaster"
 import ProductosTienda from './assets/pages/ProductosTienda.jsx'
 import ProductPage from './assets/pages/ProductPage.jsx'
+import EditProductPage from './assets/pages/EditProductPage.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -45,6 +46,8 @@ function App() {
                     
                     <Route element ={<AdminRoute />}>
                       <Route path="/tienda/subir-producto" element ={<UploadProductPage />} />
+                      <Route path="/tienda/editar-producto" element ={<EditProductPage />} />
+
                     
                     </Route>
 

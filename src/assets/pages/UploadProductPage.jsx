@@ -6,8 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { LuUpload, LuMusic, LuDollarSign, LuBox } from "react-icons/lu";
+import { API_TIENDA } from "../../apiConfig";
 
-const API_URL = import.meta.env.VITE_API_URL_TIENDA;
 
 const UploadProductPage = () => {
   const [product, setProduct] = useState({
@@ -33,7 +33,7 @@ const UploadProductPage = () => {
       // Obtenemos el token del localStorage (o de tu contexto)
       const token = localStorage.getItem("token"); 
 
-      await axios.post(`${API_URL}/productos` || 'http://localhost:3000', product, {
+      await axios.post(`${API_TIENDA}/productos`, product, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

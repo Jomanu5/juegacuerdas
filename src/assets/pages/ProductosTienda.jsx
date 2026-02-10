@@ -13,6 +13,8 @@ import {
 import { LuPackageSearch } from "react-icons/lu"; // Un icono de búsqueda vacía
 import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
+
+
 const ProductosTienda = () => {
   const {getProductos, products= [], isLoading = true } = useContext(ProductContext);
   const location = useLocation();

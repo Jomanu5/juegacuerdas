@@ -4,14 +4,20 @@ import {
   Skeleton,
   HStack
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ProductContext } from "../context/ProductContext";
 import { Link } from "react-router-dom";
 
 const MainTienda = () => {
-  const { products, isLoading } = useContext(ProductContext);
+  
+  
+  const { products, isLoading, getProductos } = useContext(ProductContext);
+  
+  useEffect(() => {
+    getProductos()
 
-  // 🎻 Tomamos solo los 3 primeros productos de la lista
+  }, [])
+  
   const ultimosProductos = products?.slice(0, 3) || []
 
   return (
