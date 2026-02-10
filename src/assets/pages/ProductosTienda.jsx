@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ProductContext } from "../context/ProductContext";
 import { 
   SimpleGrid, 
@@ -12,12 +12,25 @@ import {
 } from "@chakra-ui/react";
 import { LuPackageSearch } from "react-icons/lu"; // Un icono de búsqueda vacía
 import ProductCard from "../components/ProductCard";
-
+import { useLocation } from "react-router-dom";
 const ProductosTienda = () => {
-  const { products= [], isLoading = true } = useContext(ProductContext);
+  const {getProductos, products= [], isLoading = true } = useContext(ProductContext);
+  const location = useLocation();
+
+  useEffect(()=> {
+    const queryParams = new URLSearchParams(location.search)
+    const filtros = {
+      categoria:queryParams.get("categoria") || "",
+      precioMax:queryParams.get("precioMax") || "",
+      page: queryParams.get ("page") || 1
+    };
+    getProductos(filtros);
+
+    
+  }, [location.search]);
 
   // 1. Mientras carga, mostramos el spinner
-  if (isLoading) return <Center h="50vh">Cargando violines...</Center>;
+if (isLoading) return <Center h="50vh">Cargando violines...</Center>;
 
   // 2. Si terminó de cargar pero el array está vacío
 if (!Array.isArray(products) || products.length === 0) {    return (
