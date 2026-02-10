@@ -1,6 +1,7 @@
 import { 
   Box, Button, Container, Field, Heading, Input, Stack, 
-  Card, Textarea, NumberInput, Group, Icon, Text, Image 
+  Card, Textarea, NumberInput, Group, Icon, Text, Image, 
+  NativeSelect
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
