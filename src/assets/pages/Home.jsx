@@ -32,7 +32,7 @@ const Home = () => {
             <Image 
               src="/Logo_Color.png" 
               alt="JuegaCuerdas Logo" 
-              maxW={{ base: "280px", md: "500px" }} 
+              maxW={{ base: "180px", md: "300px" }} 
               mb={2} 
             />
 
